@@ -24,8 +24,8 @@
 
 # 2. Terraform — EC2 with User Data (c6a.12xlarge)
   resource "aws_instance" "PathnexEc2" {
-    ami          = "ami-0abcd1234abcd1234"
-    instance_type = "c6a.12xlarge"
+      ami          = "ami-0abcd1234abcd1234"
+      instance_type = "c6a.12xlarge"
 
     user_data = <<EOF
     #!/bin/bash
