@@ -1,0 +1,121 @@
+# Day 13 — DEBUG DAY
+
+
+## 1🔹 Ansible (broken)
+
+---
+
+ - name: "Broken"
+   hosts: all
+   become: yes
+
+   tasks:
+     - name: Install
+       yum:
+        - name: nginx
+          state: present
+
+
+
+
+
+
+
+## 2🔹 Terraform (broken)
+
+resource "aws_instance" "BadEC2" {
+
+   ami      = "ami-123"
+   instance_type = "c5.large"
+
+  tags = {
+   Name = "Broken"
+  
+  }
+
+}
+
+## 3🔹 Kubernetes (broken)
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: Broken
+
+spec:
+    replica: 2
+
+    selector:
+        matchLabels: 
+           app: broken
+
+    template:
+       metadata:
+         labels: 
+           app: broken
+      spec:
+       containers:
+        - name: app
+          image: nginx
+
+
+
+
+
+
+
+
+
+
+
+## 4🔹 Jenkins Pipeline — Matrix Build
+
+pipeline {
+
+agent any
+
+environment {
+INSTITUTE_NAME = "Pathnex"
+}
+stages {
+   stage('Matrix Build') {
+     axes {
+       name 'JAVA_VERSION'
+       value '8', '11', '17'
+     }
+   }
+
+   stages {
+      stage('Build') {
+        steps {
+         sh "echo Building with Java $JAVA_VERSION"
+        }
+      }
+   }
+}
+
+}
+
+
+
+
+
+
+
+## 5🔹 GitLab CI — Matrix Jobs
+
+
+stages:
+  - build
+
+
+build:
+  stage: build
+  image: maven:3.8.1-jdk-17
+  parallel:
+    matrix:
+    - JAVA_VERSION: ['8', '11', '17']
+  script:
+    - echo "Building with Java $JAVA_VERSION"
+
