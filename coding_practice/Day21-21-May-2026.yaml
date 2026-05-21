@@ -1,0 +1,206 @@
+# Day 21 — SPEED TYPING (LEVEL 2)
+
+
+## 1. Ansible
+
+---
+ - name: Install and configure nginx
+   hosts: all
+   become: yes
+
+   tasks:
+    - name: Install nginx
+      yum:
+       name: nginx
+       state: present
+    - name: Start and enable nginx service
+      service:
+       name: nginx
+       enabled: yes
+
+## 2. Terraform
+
+provider "aws" {
+region = "ap-south-1"
+}
+
+resource "aws_instance" "pathnex_ec2" {
+ami          = "ami-0f58b397bc5c1f2e" 
+instance_type = "t2.micro"
+
+
+tags = {
+Name = "Pathnex-EC2"
+Owner = "PathnexStudent"
+
+}
+}
+
+
+## 3. Kubernetes
+
+apiVersion: app/v1
+kind: Deployment
+metadata:
+ name: nginx-Deployment
+spec:
+ replicas: 3
+
+ selector:
+   matchLabels:
+     app: nginx
+
+
+  template:
+    metadata:
+     labels:
+      app: nginx
+  spec:
+  containers:
+   - name: nginx
+    image: nginx
+    ports:
+     - containerPort: 80
+  
+
+
+
+##4. Shell
+   #!/bin/bash
+
+   date
+   uptime
+   df -h
+
+
+   ## 5.  Jenkins Pipeline — Deploy to Multiple Environments
+
+   pipeline {
+   agent any
+   environment {
+   INSTITUTE_NAME = "Pathnex"
+   }
+   stages {
+   stage('Deploy to Dev'){
+   steps {
+   sh 'echo "Deploying $INSTITUTE_NAME to Dev environment"'
+   }
+   }
+   stage('Deploy to Staging') {
+   steps {
+   input message: "Approve Staging Deployment"
+   sh 'echo "Deplying $INSTITUTE_NAME to Staging environemnt'
+   }
+   stage('Deploy to Prod'){
+   
+   steps {
+   input message: "Approve Prod Deployemnt?"
+   sh 'echo "Deploying $INSTITUTE_NAME to Prod environment"'
+   
+   }
+   
+   }
+
+## 6. Gitlab CI - Multienvironment
+
+stages:
+ - Deploy
+
+
+ variables:
+  INSTITUTE_NAME: "Pathnex"
+
+  deploy-dev:
+   stage: deploy
+   image: alpine: latest
+   script:
+    - echo "Deplying $INSTITUTE_NAME to Dev environemnt"
+
+  deploy-staging:
+    stage: deploy
+    image: alpine:latest
+    script:
+     - echo "Deploying $INSTITUTE_NAME to Staging environemnt"
+    when: manual
+
+
+    deploy-prod:
+      stage: deploy
+      image: alpine:latest
+      script:
+       - echo "Deploying $INSTITUTE_NAME to Prod environemnt"
+       when: manual
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
