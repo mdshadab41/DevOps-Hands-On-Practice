@@ -1,0 +1,43 @@
+
+pipeline {
+    agent any
+
+    environement {
+        INSTITUTE_NAME = 'Pathnex'
+        TEAM = 'DevOps'
+        ENV  = 'prod'
+        PROJECT = 'Pathnex-Training'
+    }
+
+    stages {
+        stage('Infrastructure') {
+            steps {
+                sh 'terraform init'
+                sh 'terraform apply -auto-approve'
+            }
+        }
+
+        stage('App Development') {
+            steps {
+                sh 'ansible-playbook playbook-ansible.yml'
+                sh 'kunectl apply -f deploy_kubernetes.yaml'
+            }
+        }
+
+        stage('Monitoring Checks') {
+            steps {
+                sh 'chmod +x script_shell.sh'
+                sh './script_shell.sh'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Deployment Successfull'
+        }
+        failure {
+            echo 'Deployment Failed'
+        }
+    }
+
+}

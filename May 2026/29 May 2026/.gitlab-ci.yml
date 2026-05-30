@@ -1,0 +1,33 @@
+stages:
+  - infrastructure
+  - app_deployment
+  - monitoring_checks
+  
+
+variables:
+  $INSTITUTE_NAME: "Pathnex" 
+  TEAM: "DevOps"
+  ENV: "prod"
+  PROJECT: "Pathnex-Training"
+
+infrastructure:
+  stage: infrastructure
+
+  script:
+    - terraform init 
+    - terraform apply -auto-approve
+
+app_deployment:
+  stage: app_deployment 
+  
+
+  script:
+    - ansible-playbook playbook_ansible.yml
+    - kubectl apply -f deploy_kubernetes.yaml
+
+monitoring_checks:
+ stage: monitoring_checks
+
+ script:
+  - chmod +x script_shell.sh
+  - ./script_shell.sh

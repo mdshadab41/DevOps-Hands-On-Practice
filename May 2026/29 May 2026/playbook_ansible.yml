@@ -1,0 +1,27 @@
+---
+ - hosts: all
+   become: yes
+
+
+   tasks:
+    
+    - name: Install nginx
+      package:
+        name: nginx
+        state: present
+
+    - name: Deploy HTML page
+      copy:
+       dest: /usr/share/nginx/html/index.html
+       content: |
+         <html>
+         <h1> Welcome to Pathnex</h1>
+         </html>
+    
+    - name: Enable nginx
+      service:
+        name: nginx
+        enabled: yes
+        state: started
+
+        
