@@ -1,0 +1,82 @@
+# Day 28 — Debug Day
+
+## 🔹 Ansible — Broken
+
+---
+ - name: Install nginx
+   hosts: all
+   become: yes
+   tasks:
+    - name: Installing nginx
+      yum:
+       name: nginx 
+       stage: present
+
+## 🔹 Terraform — Broken
+
+resource "aws_s3" "PathnexBucket" {
+bucket    = "pathnex-bucket"
+ac1       = "public-read"
+}
+
+## 🔹 Kubernetes — Broken
+apiVersion: v1
+kind: Pod
+metadata:
+  name : brokenPod
+spec:
+  containers:
+   - name: app
+    image: nginx
+
+
+
+## 🔹 Jenkins Pipeline — Automatic Rollback
+pipline {
+agent any
+environment {
+INSTITUTE_NAME = "Pathnex"
+TEAM = "DevOps"
+ENV = "prod"
+}
+
+stages {
+stage('Deploy'){
+steps {
+Script {
+try {
+sh 'echo "Deploying $INSTITUTE_NAME app in $ENV for $TEAM"'
+sh 'exit 1' // simulate failure
+
+} catch (Exception e) {
+ echo "Deployment failed. Rolling back $INSTITUTE_NAME app in $ENV"
+}
+
+}
+
+}}
+}
+
+}
+
+
+
+## 🔹 GitLab CI — Rollback Strategy
+stages:
+  - deploy
+
+variables:
+   INSTITUTE_NAME: "Pathnex"
+   TEAM: "DevOps"
+   ENV : "prod"
+
+
+deploy:
+   stage: deploy
+   image: alpine:latest
+   script:
+    - echo "Deploying $INSTITUTE_NAME app in $ENV for $TEAM"
+    - exit 1
+   after_script:
+    - echo "Deployment failed. Rolling back $INSTITUTE_NAME app in $ENV"
+
