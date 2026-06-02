@@ -1,0 +1,16 @@
+What I did today
+ - attended all lecture and make notes - (2-3 hrs)
+ - push code on github (coding practice) - (1 hr)
+ - Accidental CTO by Subhash Chaudhary ( Read Chapter 1) (30 mins)
+ - Linux practice mostly goes into troubleshooting(File, directory, permission, error: ssh connection time out ) - (2-3hr)  
+ - Revise notes - (1 hr)
+
+
+
+Tomorrow's Task
+
+ - will attend all ive classes/youtube
+ - push code on github (coding practices & read about the explanantion of the code)
+ - will read chapter 2 Accidental CTO by Subhash Chaudahry 
+ - Revise notes 
+ - Linux practice
