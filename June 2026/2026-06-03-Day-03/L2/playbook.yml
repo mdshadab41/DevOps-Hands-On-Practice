@@ -1,0 +1,20 @@
+# Ansible — Install Apache and Start Service
+
+---
+ - name: Install and Start Apache
+   hosts: all
+   become: true
+
+   tasks:
+     - name: Install apache 
+       yum:
+         name: httpd 
+         state: present
+
+     - name: Start apache 
+       service:
+         name: httpd
+         state: started
+         enabled: yes //start automatically after reboot
+
+   

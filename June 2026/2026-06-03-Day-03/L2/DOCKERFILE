@@ -1,0 +1,17 @@
+# Docker File for Nginx Web Server
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+
+
+#HTML
+<h1> Hello Pathnex </h1>
+
+#Bash
+#Real Path
+/usr/share/nginx/html
+
+
+# Bash
+docker build -t pathnex-nginx .
+docker run -d -p 8080 pathnex-nginx
+
