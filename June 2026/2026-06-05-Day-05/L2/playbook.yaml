@@ -1,0 +1,18 @@
+# Ansible — Create User and Set Permissions
+
+- name: Create a new user 
+  hosts: all
+  become: true 
+
+  tasks:
+   - name: create user 
+     user:
+      name: pathnex
+      state: present
+      shell: /bin/bash
+   - name: Set permission for the user 
+     file:
+       path: /home/pathnex
+       owner: pathnex
+       group: pathnex
+       mode: '0755'

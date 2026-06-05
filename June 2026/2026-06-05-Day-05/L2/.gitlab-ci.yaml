@@ -1,0 +1,21 @@
+#GitLab CI/CD — With Docker Build
+stages:
+  - build 
+  - push 
+  - deploy
+
+build:
+  stage: build 
+  script:
+    - docker build -t pathnex-app .
+
+push:
+  stage: push 
+  script:
+    - docker push pathnex-app 
+
+deploy:
+  stage: deploy
+  script:
+    - kubectl apply -f kubernetes/deployment.yaml
+    
