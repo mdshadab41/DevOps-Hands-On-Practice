@@ -1,0 +1,18 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build 
+  image: maven:3.8.1-jdk-17
+  script:
+    - mvn clean compile 
+  artifacts:
+     paths:
+       - target/
+
+test:
+  stage: test 
+  image: maven:2.8.1-jdk
+  script:
+    - mvn test 
