@@ -1,0 +1,13 @@
+stages:
+  - deploy 
+
+
+  variables:
+    INSTITUTE_NAME: "Pathnex"
+    ENVIRONMENT: "dev"
+
+  deploy:
+    stage: deploy 
+    image: alpine:latest
+    script:
+      - echo "Deploying to $ENVIRONMENT by $INTITUTE_NAME"
