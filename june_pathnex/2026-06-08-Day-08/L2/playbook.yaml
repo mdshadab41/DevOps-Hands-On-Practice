@@ -1,0 +1,14 @@
+---
+  - name: Install Docker Compose
+    hosts: all
+    become: true
+
+    tasks:
+      - name: Install dependencies
+        yum: 
+         name: "pyothn3-pip"
+         state: present
+      - name: Install docker-compose
+        pip:
+          name: docker-compose 
+          
