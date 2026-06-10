@@ -1,0 +1,34 @@
+## 🔹 Ansible — Create Docker Containers for Multiple Applications
+
+---
+  - name: Setup Docker Containers for Multiple Apps 
+    hosts: all
+    become: true 
+
+    tasks:
+     - name: Pull Web App Image 
+       docker_image:
+         name: my-web-app
+         source: pull 
+     - name: Pull Database Image
+       docker_image:
+         name: my-database-app 
+         source: pull 
+     - name: Run Web App Containers
+       docker_containers:
+         name: my-web-app
+         image: my-web-app
+         state: started
+         published_ports:
+           - "8080:80"  
+     - name: Run Database App Containers
+       docker_containers:
+         name: database-app
+         image: my-database-app
+         state: started
+         published_ports:
+           - "3306:3306"  
+    
+
+          
+      
