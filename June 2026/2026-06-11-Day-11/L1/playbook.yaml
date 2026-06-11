@@ -1,0 +1,86 @@
+## 🔹 Ansible — Install MariaDB
+
+# --- 
+#   - name: Install MariaDB for Nephronix
+#     hosts: all 
+#     become: true 
+
+#     tasks:
+#       - name: Install MariaDB
+#         yum:
+#           name: mariadb-server 
+#           state: present
+        
+#       - name: Start MariaDB
+#         service:
+#           name: mariadb 
+#           state: started 
+#           enabled: yes
+
+
+# Task 1 — Fix and Rewrite & & Task 2 Add a Third Task
+
+# - name: Install MariaDB
+#   hosts: all
+#   become: true
+
+#   tasks:
+#     - name: Install MariaDB
+#       yum:
+#         name: mariadb-server 
+#         state: present
+
+#     - name: Start MariaDB
+#       service:
+#         name: mariadb 
+#         state: started 
+#         enabled: yes
+
+#     - name: Verify MariaDB 
+#       command: systemctl status mariadb
+#       register: db_status
+    
+#       - name: Print status 
+#         debug:
+#           msg: "{{ db_status.stdout }}"
+
+#Task 3 — Write from Scratch 
+
+# Requirements:
+# - hosts        → all
+# - become       → true
+# - Task 1       → install mariadb-server using yum
+# - Task 2       → start + enable mariadb using service
+# - Task 3       → check mariadb version using command module
+#                  command: mysql --version
+#                  register into: mysql_version
+# - Task 4       → print it using debug
+#                  msg: "{{ mysql_version.stdout }}"
+
+- name: Install Mariadb for Nephronix
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: install mariadb-server using yum 
+      yum:
+        name: mariadb-server
+        state: present 
+    - name: Start & Enabled MariaDB
+      service:
+        name: mariadb 
+        state: started
+        enabled: true
+    - name: Verify Mariadb 
+      command: mariadb --version 
+      register: mariadb_version
+
+    - name: Print status 
+      debug:
+        msg:"{{ mariadb_version.stdout }}"
+
+
+
+
+
+   
