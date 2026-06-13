@@ -1,0 +1,13 @@
+stages:
+  - build 
+
+
+build:
+  stage: build 
+  image: maven:3.8.1-jdk-17
+  parallel:
+    matrix:
+      - JAVA_VERSION: ['8', '11', '17']
+        ENVIRONMENT: ['dev', 'staging']
+  script:
+    - echo "Building with Java $JAVA_VERSION" for $ENVIRONMENT
