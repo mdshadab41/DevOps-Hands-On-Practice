@@ -1,0 +1,18 @@
+stages:
+  - build
+
+build-main:
+  stage: build 
+  image: maven:3.8.1-jdk-17
+  script: 
+    - mvn clean compile
+  only:
+    - main
+
+build-dev:
+  stage: build 
+  image: maven:3.8.1-jdk-17
+  script:
+    - mvn clean compile
+  only:
+    - dev

@@ -1,0 +1,14 @@
+#  🔹 Ansible — Ensure File With Content
+
+- name: Create config file for Nephronix
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Write content to file 
+      copy:
+        dest: /etc/nephronix.conf
+        content: |
+          Welcome to Nephronix Healthcare Provider
+          Today is Day 12
+    
