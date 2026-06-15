@@ -1,0 +1,23 @@
+// Jenkins Pipeline — Scheduled Build
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+    }
+    triggers {
+        cron('H 2 * * *') //everyday at 2am
+    }
+    stages {
+        stage('Checkout'){
+            steps {
+                 git url: 'https://github.com/Pathnex/sample-java-app.git'
+            }
+        }
+        stage('Build'){
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+    }
+}
