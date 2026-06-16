@@ -1,0 +1,3 @@
+#  Kubernetes — Helm Chart for Redis with Persistence
+
+heml install nephronix-redis bitnami/redis --set persistence.enabled=true --set persistance.size=8Gi
