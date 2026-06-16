@@ -1,0 +1,23 @@
+# Ansible — Create and Start EC2 Instances
+
+- name: Create EC2 instances 
+  hosts: localhost 
+  become: true
+
+  tasks:
+    - name: Launch EC2 instance in us-east-1
+      ec2_instance:
+        name: nephronix-ec2-us-east-1
+        key_name: nephronix-key 
+        region: us-east-1 
+        instance_type: t2.micro
+        image: ami-0abcd1234abcd1234
+        wait: yes
+    - name: Launch EC2 instance in us-west-1
+      ec2_instance:
+        name: nephronix-ec2-us-west-1
+        key_name: nephronix-key 
+        region: us-west-1 
+        instance_type: t2.micro
+        image: ami-0abcd1234abcd1234
+        wait: yes

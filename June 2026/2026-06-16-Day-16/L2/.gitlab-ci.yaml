@@ -1,0 +1,26 @@
+# GitLab CI/CD — Multi-Region Deployment with Kubernetes
+
+stages:
+  - build 
+  - push 
+  - deploy 
+
+build:
+  stage: build 
+  script:
+    - docker build -t nephronix-web-app .
+  
+push:
+  stage: push 
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+    - docker push nephronix-web-app 
+deploy:
+  stage: deploy 
+  script:
+    - | 
+    if [ "$CI_COMMIT_REF_NAME" == "main" ]; then 
+      kubectl --context=us-east apply -f kubernetes/prod-deployment.yaml
+    else 
+      kubectl --context=us-west apply -f kubernetes/dev-deployment.yaml
+    fi

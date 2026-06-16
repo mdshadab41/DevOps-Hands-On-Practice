@@ -1,0 +1,36 @@
+ # Kubernetes — Multi-Cluster Deployment with Federation
+
+ apiVersion: apps/v1 
+ kind: Deployment
+ metadata:
+   name: nephrnix-deployment
+   labels:
+     app: nephronix-app 
+ spec:
+   replicas: 2
+   selector:
+     matchLabels:
+       app: nephronix-app 
+   template:
+      metadata:
+        labels:
+          app: nephronix-app 
+      spec:
+        containers:
+          - name: nginx 
+            image: nginx 
+            ports:
+              - containerPort: 80
+---
+ apiVersion: v1 
+ kind: Service 
+ metadata: 
+   name: nephronix-service 
+ spec: 
+   selector:
+     app: nephronix-app 
+   ports:
+     - protocol: TCP
+       port: 80
+      
+     

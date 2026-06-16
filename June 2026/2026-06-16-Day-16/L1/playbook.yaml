@@ -1,0 +1,16 @@
+
+# tasks/main.yml
+- name: Install nginx
+  yum: 
+    name: nginx 
+    state: present 
+
+# handlers/main.yml
+- name: Restart nginx 
+  service:
+    name: nginx 
+    state: restarted 
+
+# vars/main.yml
+app_name: Nephronix
+port: 80
