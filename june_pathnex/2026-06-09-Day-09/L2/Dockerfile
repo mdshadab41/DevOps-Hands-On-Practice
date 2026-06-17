@@ -1,0 +1,4 @@
+FROM ubuntu:22.4
+ENV INSTITUTE=Pathnex 
+ENV COURSE=DevOps
+CMD echo "$INSTITUTE - ${COURSE}"

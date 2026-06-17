@@ -1,0 +1,18 @@
+# 🔹 Ansible — Setup Docker Container for Nginx
+---
+  - name: all 
+    hosts: all 
+    become: true 
+
+    tasks:
+     - name: Pull Nginx image 
+       docker_image:
+         name: nginx 
+         source: pull 
+     - name: Run Nginx container 
+       docker_conatiner:
+         name: nginx-container 
+         image: nginx 
+         state: started
+         published_ports:
+           - "8080:80"

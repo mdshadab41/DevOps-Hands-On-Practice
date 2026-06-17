@@ -1,0 +1,6 @@
+stages:
+  - deploy 
+deploy:
+  stage: deploy 
+  script:
+    - kubectl apply -f kubernetes/deployment.yaml

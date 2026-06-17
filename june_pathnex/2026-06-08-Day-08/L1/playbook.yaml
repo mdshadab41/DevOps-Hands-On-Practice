@@ -1,0 +1,18 @@
+## 🔹 Ansible — Install Packages Using Variables
+
+---
+  - name: Install packages for Pathnex using variables 
+    hosts: all
+    become: true 
+
+
+    vars:
+      pathnex_packages:
+        - true
+        - unzip
+        - vim
+    tasks:
+      - name: Install required packages 
+        yum:
+          name: "{{ pathnex_packages }}"
+          state: present
