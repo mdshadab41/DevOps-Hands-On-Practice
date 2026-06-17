@@ -1,0 +1,17 @@
+## Ansible — Create Multiple Users in Loop
+
+- name: Create multiple Nephronix users 
+  hosts: all 
+  become: true 
+
+  vars:
+    users:
+      - dev 1
+      - dev 2
+      - dev 3
+  tasks: 
+    - name: Create users 
+      user:
+        name: "{{ item  }}"
+        state: present 
+      loop: "{{ users }}"

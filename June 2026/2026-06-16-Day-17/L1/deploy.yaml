@@ -1,0 +1,24 @@
+apiVersion: v1 
+kind: Namespace
+metadata:
+  name: nephronix-namespace
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nephronix-deploy 
+  namespace: nephronix-namespace 
+spec:
+  replicas: 2
+  selector:
+    matchLabels: 
+      app: nephronix 
+    template:
+      metadata: 
+        labels: 
+          app: nephronix 
+      spec: 
+        containers:
+          - name: app 
+            image: nginx

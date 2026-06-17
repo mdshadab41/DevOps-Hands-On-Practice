@@ -1,0 +1,18 @@
+## Ansible — Auto-healing Web Servers with Systemd
+
+- name: Configure Auto-healing for web server 
+  hosts: all 
+  become: true 
+
+  tasks: 
+    - name: Ensure nginx service is running 
+      service: 
+        name: nginx 
+        state: started
+        enabled: yes
+    - name: Setip auto-restart for nginx service 
+      lineinfile:
+        path: /etc/systemd/system/nginx.service.d/override.conf
+        line: "Restart=always"
+    - name: Reload systemd 
+      command: systemctl daemon-reload

@@ -1,0 +1,33 @@
+# Kubernetes — Self-Healing with Liveness and Readiness Probes
+
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: nephronix-web-app 
+spec:
+  replicas: 5
+  selector: 
+    matchLabels:
+      app: nephronix-web-app 
+  template:
+    metadata:
+      labels: 
+        app: nephronix-web-app 
+  spec:
+    containers:
+      - name: nginx 
+        image: nginx 
+        ports:
+          - containerPort: 80 
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz 
+            port: 80 
+          initialDelaySeconds: 5
+          periodSeconds: 10

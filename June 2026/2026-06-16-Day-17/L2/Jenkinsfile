@@ -1,0 +1,35 @@
+// Jenkinsfile — Rolling Deployments with Kubernetes
+
+pipeline {
+    agent any 
+    environment {
+        IMAGE_NAME = 'nephronix-web-app'
+    }
+    stages {
+        stage('Build'){
+            steps {
+                echo 'Building Docker image...'
+                docker.build("${env.IMAGE_NAME}")
+            }
+        }
+        stage('Push') {
+            steps {
+               sh 'docker push nephronix-web-app'
+            }
+        }
+        stage('Test'){
+            steps {
+                echo 'Running tests...'
+            }
+        }
+        stage('Deploy to kubernetes'){
+            steps {
+                script {
+                    sh 'kubectl apply -f kubernetes/deplyment.yaml'
+                    sh 'kubectl rollout status deployment/nephronix-web-app'
+                }
+            }
+        }
+    }
+}
+
