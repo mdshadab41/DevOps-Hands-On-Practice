@@ -1,0 +1,20 @@
+## Ansible — Configure HAProxy for Load Balancing
+
+- name: Setup HAProxy Load Balancer 
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Install HAProxy
+      yum:
+        name: haproxy
+        state: present 
+    - name: Configure HAProxy
+      template:
+        src: haproxy.cf.j2
+        dest: /etc/haproxy/haproxy.cfg
+    - name: Start HAProxy service
+      service:
+        name: haproxy
+        state: started
+        enabled: yes
