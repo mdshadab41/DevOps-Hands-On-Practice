@@ -1,0 +1,14 @@
+## GitLab CI — Manual Approval Job
+
+stages:
+  - deploy 
+
+variables:
+  FIRM_NAME: "Nephronix"
+
+deploy:
+  stage: deploy 
+  image: alpine:latest
+  script:
+    - echo "Ready to deploy $FIRM_NAME"
+  when: manual

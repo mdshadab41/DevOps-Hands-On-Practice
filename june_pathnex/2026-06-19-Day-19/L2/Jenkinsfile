@@ -1,0 +1,26 @@
+// Jenkinsfile — Integrating Prometheus Monitoring in Pipeline
+
+pipeline {
+    agent any 
+    stages {
+        stage('Build'){
+            steps {
+                echo 'Building Docker image...'
+                docker.build('nephronix-web-app')
+            }
+        }
+        stage('Test'){
+            steps{
+                echo 'Running tests...'
+            }
+        }
+        stage('Monitor Deployment'){
+            steps{
+                script {
+                    sh 'kubectl apply -f kubernetes/deployment.yaml'
+                    sh 'kubectl get pods --watch'
+                }
+            }
+        }
+    }
+}

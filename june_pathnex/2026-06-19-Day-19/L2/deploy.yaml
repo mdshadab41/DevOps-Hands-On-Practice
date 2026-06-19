@@ -1,0 +1,33 @@
+# Kubernetes — Deploy Fluentd for Logging
+
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: fluentd 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fluentd
+  template:
+    metadata:
+      labels: 
+        app: fluentd
+  spec:
+    containers:
+      - name: fluented
+        image: fluent/fluented
+        ports:
+          - containerPort: 24224
+---
+apiVersion: v1 
+kind: Service
+metadata: 
+  name: fluentd 
+spec: 
+  selector:
+    app: fluentd 
+  ports:
+    - protocol: TCP
+      port: 24124
+  

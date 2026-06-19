@@ -1,0 +1,16 @@
+## Ansible — Deploy App Using Git
+
+- name: Deploy app from Git for Nephronix 
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Install git 
+      yum: 
+        name: git 
+        state: present 
+    
+    - name: Clone repository
+      git:
+        repo: "https://github.com/pathnex/app.git"
+        dest: /"opt/nephronix-app"
