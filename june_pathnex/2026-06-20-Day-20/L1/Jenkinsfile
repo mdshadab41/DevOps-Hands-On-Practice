@@ -1,0 +1,22 @@
+// Jenkins Pipeline — Using Credentials
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+    }
+    stages {
+        stage('Checkout'){
+            steps {
+                git url: 'https://github.com/Pathnex/sample-java-app.git'
+            }
+        }
+        stage('Use Secret'){
+            steps {
+                withCredentials([string(credentialId: 'NEPHRONIX_API_KEY', variable: 'API_KEY')]){
+                    sh 'echo "Using secret $API_KEY for $FIRM_NAME"'
+                }
+            }
+        }
+    }
+}

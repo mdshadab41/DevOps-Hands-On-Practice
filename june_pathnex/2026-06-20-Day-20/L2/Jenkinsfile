@@ -1,0 +1,24 @@
+// Jenkinsfile — Secure Credentials Management
+
+pipeline {
+    agent any 
+    environment {
+        REGISTRY_PASSWORD = credentials('docker-registry-password')
+    }
+    stages {
+        stage('Build'){
+            steps {
+                echo 'building Docker image...'
+                docker.build('nephronix-web-app')
+            }
+        }
+        stage('push'){
+            steps {
+                script{
+                    docker.withRegistry('https://docker.io', 'docker-credentials'){
+                    docker.image('nephronix-web-app').push('latest')}
+                }
+            }
+        }
+    }
+}

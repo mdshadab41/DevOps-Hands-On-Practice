@@ -1,0 +1,16 @@
+# Anisble - Broken
+
+- name: Install stuff
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd 
+        state: present
+    - name: Start httpd sevice
+      service:
+        name: httpd 
+        state: started
+        enabled: true
