@@ -1,0 +1,15 @@
+# GitLab CI/CD — Backup and Restore Deployment Files
+stages:
+  - backup 
+  - restore 
+
+backup:
+  stage: backup 
+  script: 
+    - tar -czvf /tmp/backup.tar.gz kubernetes/deployment.yaml
+
+
+restore:
+  stage: restore 
+  script:
+    - tar -xzvf /tmp/backup.tar.gz -C kubernetes/

@@ -1,0 +1,9 @@
+What I did today
+ - push code on github (coding practice) - (1 hr)
+ - Project - DialysisBot (grok setup) - completed (2hrs)
+ - Completed Morning Classes(2 hours)
+
+Tomorrow's Task
+ - will clear backlogs (Ansible) (3 hrs)
+ - push code on github (coding practices & read about the explanantion of the code) (1hr)
+ - Project - DialysisBot (DOckerize and push on github)

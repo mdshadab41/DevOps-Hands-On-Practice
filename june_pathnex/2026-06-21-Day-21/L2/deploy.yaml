@@ -1,0 +1,31 @@
+# Kubernetes — Disaster Recovery with Persistent Volumes
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nephronix-statefulset
+spec:
+  serviceName: "nephronix"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nephronix
+  template:
+    metadata:
+      labels: 
+        app: nephronix 
+    spec: 
+      containers:
+        - name: nginx 
+          image: nginx 
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: web-content
+  volumeClainTemplates:
+    - metadata:
+        name: web-content 
+      spec: 
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
