@@ -1,0 +1,13 @@
+# Ansible — Deploy Nginx Across Multiple Kubernetes Clusters
+
+- name: Deploy Nginx across multiple kubernetes clusters 
+  hosts: localhost
+  tasks:
+    - name: configure kubectl for cluster 1
+      command: kubectl --context=us-east config use-context us-east-cluster
+    - name: Deploy Nginx on CLuster 1
+      command: kubectl apply -f kubernetes/deployment.yaml
+    - name: Configure kubectl for cluster 2
+      command: kubectl --context=us-west config use-context us-west-cluset
+    - name: Configure kubectl for cluster 2
+      command: kubectl apply -f kubernetes/deployment.yaml

@@ -1,0 +1,15 @@
+# GitLab CI/CD — Multi-Cluster Deployment Strategy
+
+stages:
+  - deploy 
+
+deploy_cluster_1:
+  stage: deploy 
+  script:
+    - kubectl --context=east-cluster apply -f kubernetes/deployment.yaml
+
+deploy_cluster_2:
+  stage: deploy
+  script: 
+    - kubectl --context=us-west-cluster apply -f kubernetes/deployment.yaml
+
