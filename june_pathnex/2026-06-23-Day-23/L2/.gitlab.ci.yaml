@@ -1,0 +1,15 @@
+# GitLab CI/CD — Deploy Lambda Function
+
+stages:
+  - build
+  - deploy 
+
+build:
+  stage: build 
+  script: 
+    - zip -r lambda.zip lambda/
+
+deploy:
+  stage: deploy 
+  script: 
+    - aws lambda update-function-code --function-name nephronix-lambda --zip-file fileb://lambda.zip

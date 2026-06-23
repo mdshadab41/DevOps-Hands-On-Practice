@@ -1,0 +1,21 @@
+// Jenkinsfile — Deploy Serverless Applications with Lambda
+
+
+pipeline {
+    agent any 
+    stages{
+        stage('Build'){
+            steps {
+                echo 'Building Lambda function...'
+                sh 'zip -r lambda.zip lambda/'
+            }
+        }
+        stage('Deploy to AWS Lambda'){
+            steps {
+                script {
+                    sh 'aws lambda update-function-code --function-name nephronix-lambda --zip-file fileb://labda.zip'
+                }
+            }
+        }
+    }
+}
