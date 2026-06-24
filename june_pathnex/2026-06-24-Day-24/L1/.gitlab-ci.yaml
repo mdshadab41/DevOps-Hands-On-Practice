@@ -1,0 +1,25 @@
+## GitLab CI — Run Tests
+
+stages:
+  - unit
+  - integration
+
+variables:
+  FIRM_NAME: "Nephronix"
+  TEAM: "QA"
+  ENV: "dev"
+
+unit-test:
+  stage: unit 
+  image: maven:3.8.1-jdk-17
+  script:
+    - mvn test -Dgroup=unit 
+    - echo "Unit tests completed for $FIRM_NAME by $TEAM in $ENV"
+
+
+integration-test:
+  stage: integration 
+  image: maven:3.8.1-jdk-17
+  script:
+    - mvn verify -Dgroup=integration
+    - echo "Integration tests completed for $FIRM_NAME by $TEAM in $ENV"
