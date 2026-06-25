@@ -1,0 +1,20 @@
+## GitLab CI — Cache Dependencies
+
+stages:
+  - build
+
+variables:
+  FIRM_NAME: "Nephronix"
+  TEAM: "DevOps"
+  ENV: "staging"
+
+build:
+  stage: build 
+  image: maven:3.8.1-jdk-17
+  cache:
+    key: "${ENV}-maven-cache"
+    paths:
+      - .m2/repository
+    script:
+      - mvn clean compile
+      - echo "Cached dependencies for $FIRM on $ENV by $TEAM"

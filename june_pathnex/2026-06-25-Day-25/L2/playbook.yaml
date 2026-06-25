@@ -1,0 +1,16 @@
+## Ansible — Setup Prometheus Node Exporter for Monitoring
+
+- name: Setup Prometheus Node Exporter 
+  hosts: all 
+  become: true 
+  tasks:
+    - name: Install Prometheus Node Exporter 
+      yum: 
+        name: prometheus-node-exporter 
+        state: present 
+    - name: Start Prometheus Node Exporter service 
+      service:
+        name: prometheus-node-exporter
+        state: started
+        enabled: true 
+

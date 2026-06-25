@@ -1,0 +1,15 @@
+# GitLab CI/CD — Monitoring and Alerting in CI/CD Pipeline
+
+stages:
+  - monitor 
+  - test 
+
+montior:
+  stage: monitor
+  script:
+    - aws cloudwatch put-metric-data --namespace "AWS/EC2" --metric-name "CPUUtilization" --value 90
+
+test:
+ stage: test 
+ script:
+   - echo "Running tests..."
