@@ -1,0 +1,23 @@
+## Ansible — Install + Start Multiple Services
+
+- name: Install and enable services 
+  hosts: all 
+  become: true
+
+  tasks:
+    - name: Install services 
+      yum:
+        name: 
+          - httpd 
+          - firewalld
+        state: present
+    - name: enable and start services
+      service:
+        name: "{{ item }}"
+        state: started 
+        enabled: yes 
+      loop:
+        - httpd
+        - firewalld
+        
+        

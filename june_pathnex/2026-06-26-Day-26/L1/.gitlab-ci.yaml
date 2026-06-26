@@ -1,0 +1,15 @@
+## GitLab CI — Dynamic Environment Deployment
+
+stages:
+  - deploy 
+variables:
+  FIRM_NAME: "Nephronix"
+  TEAM: "DevOps"
+deploy:
+  stage: deploy 
+  image: alpine:latest
+  environment:
+    name: $CI_COMMIT_REF_NAME
+    url: http://$CI_COMMIT_REF_NAME.nephronix.com
+  script:
+    - echo "Deploying $FIRM_NAME app to $CI_COMMIT_REF_NAME for $TEAM team"

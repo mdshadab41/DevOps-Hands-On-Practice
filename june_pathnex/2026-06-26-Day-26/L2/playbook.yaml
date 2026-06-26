@@ -1,0 +1,15 @@
+# Ansible — Implementing SSH Key-based Authentication
+
+- name: Implement SSH Key Authentication 
+  hosts: all 
+  become: true 
+  
+  tasks:
+    - name: Generate SSH key pair
+      command: ssh-keygen -t rsa -b 2048 -f /home/user/.ssh/id_rsa -N ""
+    - name: Add SSH public key to authorized_keys
+      authorized_key:
+        user: user
+        state: present
+        key: "{{ lookup('file', '/home/user/.ssh/id_rsa.pub') }}"
+

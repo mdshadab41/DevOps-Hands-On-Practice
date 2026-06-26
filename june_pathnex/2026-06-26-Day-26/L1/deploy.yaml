@@ -1,0 +1,15 @@
+## Kbernetes — Init Container
+
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: nephronix-init
+spec:
+  initContainers:
+    - name: setup
+      image: busybox
+      command: ["sh", "-c", "echo Initializing; sleep 10"]
+    containers: 
+      - name: main 
+        image: nginx
+        

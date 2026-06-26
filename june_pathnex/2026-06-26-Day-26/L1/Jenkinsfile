@@ -1,0 +1,23 @@
+// Jenkins Pipeline — Deploy to Dynamic Environment
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+        TEAM      = "DevOps"
+    }
+    parameters{
+        string(name: 'ENVIRONMENT', defaultValue: 'dev', description: 'Deployment Environment')
+}
+stages {
+    stage('Deploy'){
+        steps {
+            sh 'echo "Deploiyng $FIRM_NAME app to $ENVIRONEMNT for $TEAm team"'
+        }
+    }
+}
+
+
+
+    }
+      

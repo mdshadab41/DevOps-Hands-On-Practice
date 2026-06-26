@@ -1,0 +1,24 @@
+// Jenkinsfile — Secure the Pipeline with Secrets
+
+pipeline {
+    agent any 
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
+    }
+    stages{
+        stage('Build'){
+            steps {
+                echo 'Building Docker image'
+                docker.build('nephronix-web-app')
+            }
+        }
+        satge('Deploy'){
+            steps {
+                echo 'Deploying to AWS EC2...'
+                sh 'aws ec2 run-instances --image-id ami-0abcd1234 --count 1 --instance-type t2.micro'
+
+            }
+        }
+    }
+}
