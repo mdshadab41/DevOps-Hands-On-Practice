@@ -1,0 +1,17 @@
+## 🔹 Kubernetes — CronJob
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nephronix-cron
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec: 
+      template: 
+        spec: 
+          containers:
+            - name: job 
+              image: busybox
+              command: ["sh", "-c", "echo Pathnex CronJob running"]
+        restartPolicy: OnFailure

@@ -1,0 +1,16 @@
+# Ansible — Deploy a Web Application to Multiple Hosts
+
+- name: Deploy web application to multiple Hosts
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Copy web app files 
+      copy: 
+        src: /path/to/web/app/
+        dest: /var/www/html/ 
+    - name: Start web app service
+      service: 
+       name: apache2
+       state: started 
+       enabled: yes
