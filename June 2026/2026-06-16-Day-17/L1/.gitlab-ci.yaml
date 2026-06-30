@@ -1,0 +1,13 @@
+## GitLab CI — Deployment Simulation
+
+stages:
+  - deploy 
+variables:
+  FIRM_NAME: "Nephronix"
+  ENVIRONMENT: "staging"
+
+deploy:
+  stage: deploy 
+  image: alpine:latest
+  script:
+    - echo "Deploying $FIRM_NMAE application to $ENVIRONMENT"

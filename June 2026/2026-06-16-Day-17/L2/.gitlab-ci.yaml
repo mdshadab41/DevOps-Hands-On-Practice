@@ -1,0 +1,55 @@
+# GitLab CI/CD — Multi-Cloud Deployment
+
+stages:
+  - build 
+  - push 
+  - deploy 
+
+build:
+  stage: build 
+  script:
+    - docker build -t nephronix-web-app .
+
+push:
+  stage: push 
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"  
+    - docker push nephronix-web-app 
+deploy_aws:
+  stage: deploy 
+  script:
+    - kubectl --context=aws-cluster apply -f kubernetes/deployment.yaml
+
+deploy_azure: 
+  stage: deploy
+  script: 
+    - kubectl --context=azure-cluster apply -f kubernetes/deployment.yaml 
+  
+# Task
+
+# Create a GitLab pipeline that:
+
+# Builds an Nginx Docker image.
+# Pushes it to a registry.
+# Deploys it only to an AWS Kubernetes cluster.
+---
+stages:
+  - build 
+  - push 
+  - deploy
+
+build:
+  stage: build 
+  script:
+    - docker build -t nginx-app .
+
+push:
+  stage: push
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+    - docker push nginx-app 
+
+deploy_aws:
+  stage: deploy 
+  script: 
+    - kubectl --context=aws-cluster apply -f kubernetes/deployment.yaml
