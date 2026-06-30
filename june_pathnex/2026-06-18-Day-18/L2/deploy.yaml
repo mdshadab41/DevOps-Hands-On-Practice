@@ -1,0 +1,34 @@
+# Kubernetes — Horizontal Pod Autoscaler with Multiple Replicas
+
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: nephronix-web-app 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nephronix-web-app 
+  template:
+    metadata:
+      labels: 
+        app: nephronix-web-app 
+    spec:
+      containers:
+        - name: nginx 
+          image: nginx 
+          ports:
+            - containerPort: 80
+--- 
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscalar
+metadata:
+  name: nephronix-web-app-hpa
+spec: 
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nephronix-web-app 
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80

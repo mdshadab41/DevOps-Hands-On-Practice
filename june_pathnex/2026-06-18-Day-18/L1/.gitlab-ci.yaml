@@ -1,0 +1,16 @@
+## GitLab CI — Rollback Simulation
+
+stages:
+  - deploy
+
+variables:
+  FIRM_NAME: "Nephronix"
+
+deploy:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "Deploying $FIRM_NAME application"
+    - exit 1
+  after_script:
+    - echo "Deployment faailed. Rolling back $FIRM_NAME application..."

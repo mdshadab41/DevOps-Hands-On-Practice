@@ -1,0 +1,21 @@
+## Kubernetes — Node Affinity
+
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: nephronix-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      requireDuringSchedulingIgnoreDuringExecution:
+       nodeSelectorTerms:
+         - matchExpressions:
+             - key: disktype
+               operator: In 
+               values: 
+                 - ssd
+  containers:
+    - name: web
+      image: nginx
+      
+         

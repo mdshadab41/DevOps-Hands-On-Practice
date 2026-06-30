@@ -1,0 +1,14 @@
+# Ansible — Use Ansible Facts
+
+- name: Show system facts for Nephronix
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Print OS info
+      debug:
+        var: ansible_facts['os-family']
+
+    - name: Print IP address
+      debug:
+        var: ansible_facts['default_ipv4']['address']

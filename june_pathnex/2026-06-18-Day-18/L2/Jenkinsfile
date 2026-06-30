@@ -1,0 +1,26 @@
+pipeline {
+    agent any 
+    stages {
+        stage('Build'){
+            steps {
+                echo 'Building Docker image...'
+                docker.build('nephronix-web-app')
+            }
+        }
+        stage('Test'){
+            steps {
+                echo 'Running tests...'
+            }
+        }
+        stage('Blue-Green Deployment'){
+            steps {
+                script {
+                    sh 'kubectl apply -f kubernetes/blue-deployment.yaml'
+                    sh 'kubectl apply -f kubernetes/green-deployment.yaml'
+                    sh 'kubectl rollout statis deployment/blue-deployment'
+                    sh 'kubectl rollout statis deployemt/green-deployment'
+                }
+            }
+        }
+    }
+}

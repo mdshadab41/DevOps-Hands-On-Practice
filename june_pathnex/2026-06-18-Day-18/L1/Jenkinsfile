@@ -1,0 +1,20 @@
+// Jenkins Pipeline — Rollback on Failure
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+    }
+    stages {
+        stage('Deploy'){
+            steps{
+                try {
+                    sh 'echo "Deploying $INSTITUTE_NAME application..."'
+                    sh 'exit 1' //simulate failue
+                }catch (Exception e){
+                    echo "Deployment failed. Rolling back $FIRM_NAME application..."
+                }
+            }
+        }
+    }
+}
