@@ -1,0 +1,30 @@
+// Jenkins Pipeline — Trigger on Git Tag
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+        TEAM = "DevOps"
+        ENV = "prod"
+    }
+    triggers {
+        pollSCM('H/15 * * * *')
+    }
+    stages {
+        stage('Checkout'){
+            steps {
+                git url: 'https://github.com/Pathnex/sample-java-app.git', branch: 'main'
+
+            }
+
+        }
+        stage('Build'){
+            when {
+                buildingTag()
+            }
+            steps{
+                sh 'echo "Building $FIRM_NAME app for $TEAM team in $ENV environment'
+            }
+        }
+    }
+}

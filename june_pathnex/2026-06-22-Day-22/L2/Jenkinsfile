@@ -1,0 +1,21 @@
+// Jenkinsfile — Multi-Cluster Deployment Strategy
+
+pipeline {
+    agent any 
+    stages {
+        stage('Deploy to Cluster 1'){
+            steps {
+                script {
+                    sh 'kubectl --context=us-east-cluster apply -f kubernetes/deployment.yaml'
+                }
+            }
+            stage('Deploy to Cluster 2'){
+                steps {
+                    sh 'kubectl --context=us-east-cluster apply -f kubernetes/deployment.yaml'
+                }
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,19 @@
+## Kubernetes — DaemonSet
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nephronix-daemon
+spec:
+  selector:
+    matchLabels:
+      app: ds 
+  template:
+    metadata:
+      labels: 
+        app: ds 
+    spec:
+      containers:
+        - name: monitor 
+          image: busybox
+          command: ["sh", "-c", "while true; do echo Nephronix Node Monitor; sleep 20; done"]

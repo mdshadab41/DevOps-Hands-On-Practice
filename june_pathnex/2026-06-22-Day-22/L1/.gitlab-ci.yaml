@@ -1,0 +1,17 @@
+## GitLab CI — Trigger on Tag
+
+stages:
+  - build
+
+variables:
+  FIRM_NAME: "Nephronix"
+  TEAM: "DevOps"
+  ENV: "prod"
+
+build:
+  stage: build 
+  image: maven:3.8.1-jdk-17
+  script:
+    - echo "Building $FIRM_NAME app for $TEAM team in $ENV environment"
+  only:
+    - tags
