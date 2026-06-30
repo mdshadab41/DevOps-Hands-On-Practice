@@ -1,0 +1,25 @@
+## 🔹 Kubernetes — Rolling Update Strategy
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nepronix-rolling
+spec:
+  relicas: 3
+  strategy:
+    type: RollingUpdate
+    RollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    selector:
+      matchLabels:
+        app: roll 
+    template:
+      metadata:
+        labels: 
+          app: roll 
+    spec:
+      containers:
+        - name: web 
+          image: nginx 
+      

@@ -1,0 +1,18 @@
+#🔹 Ansible — Setup Auto-Scaling Group (ASG)
+
+- name: Setup auto scaling group 
+  hosts: all 
+  become: true 
+
+
+  tasks:
+    - name: Create Launch Configuration 
+      ec2-asg:
+        name: nephronix-asg 
+        region: us-east-1
+        launch_config_name: nephronix-launch-config 
+        min_size: 1
+        max_size: 1
+        desired_capacity: 2
+        vpc_zone_identifier: subnet-1234567
+  
