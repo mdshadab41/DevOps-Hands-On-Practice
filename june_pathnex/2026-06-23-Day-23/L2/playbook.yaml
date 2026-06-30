@@ -1,0 +1,10 @@
+# Ansible — Deploy Lambda Functions Using AWS CLI
+
+- name: Deploy AWS Lambda Functions
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Create Lamda function 
+      command: aws lambda create-function --function-name nephronix-lambda --runtime python3.8 --role arn:aws:iam::123456789012:role/lambda-execution-role --handler lambda_function.lambda_handler --zip-file fileb://lambda.zip
+

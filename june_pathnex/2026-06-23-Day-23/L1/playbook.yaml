@@ -1,0 +1,11 @@
+## Ansible — Add Tags to Users
+
+- name: Create users with comments
+  hosts: all
+  become: true 
+
+  tasks:
+    - name: Create Nephronix user 
+      user:
+        name: devuser 
+        comments: "Nephronix Developer User"

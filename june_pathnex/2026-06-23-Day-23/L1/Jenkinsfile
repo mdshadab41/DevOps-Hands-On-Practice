@@ -1,0 +1,31 @@
+// Jenkins Pipeline — Build Docker Image
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+        TEAM = "Devops"
+        ENV = "staging"
+        PROJECT = "WebApp"
+    }
+
+    stages {
+        stage('Checkout'){
+            steps {
+                git url: 'https://github.com/Pathnex/sample-java-app.git'
+            }
+        }
+        stage('Build Docker Image'){
+            steps{
+                sh '''
+                 docker build -t nephronic/webapp: ${ENV}-${BUILD_NUMBER} \
+                 --label "FIRM_NAME=$FIRM_NAME" \
+                 --label "TEAM=$TEAM" \
+                 --label "ENV=$ENV" \
+                 --label "PROJECT=$PROJECT" .
+                 '''
+                
+            }
+        }
+    }
+}

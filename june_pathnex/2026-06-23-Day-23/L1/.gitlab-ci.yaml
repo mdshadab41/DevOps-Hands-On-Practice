@@ -1,0 +1,23 @@
+## GitLab CI — Build Docker Image
+
+stages:
+  - dokcer-build
+
+variables:
+  FIRM_NAME: "Nephronix"
+  TEAM: "DevOps"
+  ENV: "staging"
+  PROJECT: "WebApp"
+
+docker-build:
+  stage: docker-build 
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t nephronix/webapp:${ENV}-${CI_PIPELINE_ID} \
+    --label "INSTITUTE_NAME=$INSTITUTE_NAME" \
+    --label "TEAM=$TEAM"
+    --label "ENV=$ENV"
+    --label "PROJECT=$PROJECT" .
+     

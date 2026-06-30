@@ -1,0 +1,20 @@
+## Kubernetes — Horizontal Pod Autoscaler (HPA)
+apiversion: autoscaling/v2
+kind: HorizontalPodAutoscalar
+metadata:
+  name: nephronix-hpa
+spec:
+  scaleTargetRef:
+    apiversion: apps/v1
+    kind: Deployment
+    name: nephronix-deploy
+  minReplicas: 2
+  maxReplicas: 6
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu 
+        target: 
+          type: Utilization
+          averageUtilization: 50
+
