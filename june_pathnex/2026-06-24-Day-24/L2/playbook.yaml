@@ -1,0 +1,9 @@
+## Ansible — Deploy Docker Containers with Kubernetes Using Helm
+
+- name: Deploy Docker Containers with Helm 
+  hosts: all 
+  tasks:
+    - name: Install Helm 
+      command: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+    - name: Deploy microservices with Helm 
+      command: helm install nephronix-app ./microservice-chart

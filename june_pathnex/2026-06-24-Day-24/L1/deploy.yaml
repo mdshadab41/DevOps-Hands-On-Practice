@@ -1,0 +1,25 @@
+## Kubernetes — PV + PVC
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nephronix-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/nephronix
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nephronix-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi

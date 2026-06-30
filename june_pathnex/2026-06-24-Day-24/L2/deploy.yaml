@@ -1,0 +1,20 @@
+# Kubernetes — Helm-based Auto-Scaling Deployments
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nephronix-web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nephronix-web-app 
+  template:
+    metadata:
+      labels: 
+        app: nephronix-web-app 
+    spec:
+      containers:
+        - name: nginx 
+          image: nginx 
+          ports:
+            - containerPort: 80

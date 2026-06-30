@@ -1,0 +1,12 @@
+## Ansible — Deploy Config Using Template
+
+- name: Deploy Nephronix template 
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Create config 
+      template:
+        src: nephronix.conf.j2
+        dest: /etc/nephronix.conf
+        
