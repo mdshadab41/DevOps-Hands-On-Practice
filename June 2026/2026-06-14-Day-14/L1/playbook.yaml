@@ -1,0 +1,29 @@
+- name: "Install Nginx and Deploy HTML for Nephronix"
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Install Nginx
+      yum:
+        name: nginx 
+        state: present
+
+    - name: "Deploy HTML File"
+      copy:
+        content: "<h1>Welcome to Nephronix</h1>"
+        dest: /usr/share/nginx/html/index.html
+
+    - name: "Start Nginx"
+      service:
+        name: nginx 
+        state: started
+        enabled: true
+    
+    - name: "Verify Nginx"
+      command: systemctl status nginx 
+      register: nginx_status
+
+    - name: "Print nginx Status"
+      debug:
+        msg: "{{ nginx_status.stdout }}"
+
