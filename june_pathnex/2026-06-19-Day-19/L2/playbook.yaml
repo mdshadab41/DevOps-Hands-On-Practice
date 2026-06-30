@@ -1,0 +1,18 @@
+# Ansible — Setup Prometheus for Monitoring
+- name: Install Prometheus for Monitoring
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Install Prometheus dependencies
+      yum:
+        name: 
+          - prometheus 
+          - prometheus-node-exporter
+        state: present 
+    - name: Start Prometheus service 
+      service:
+        name: prometheus 
+        state: started 
+        enabled: yes
+      

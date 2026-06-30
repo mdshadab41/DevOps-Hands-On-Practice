@@ -1,0 +1,16 @@
+// Jenkins Pipeline — Manual Approval
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+    }
+    stages {
+        stage('Deploy'){
+            steps {
+                input message: "Approve deployment for $FIRM_NAME?"
+                sh 'echo "Deployment approved and executed!"'
+            }
+        }
+    }
+}

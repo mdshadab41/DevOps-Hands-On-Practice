@@ -1,0 +1,24 @@
+## Kubernetes — Deployment Rolling Update (Detailed)
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nephronix-rollout
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: rollout 
+  template:
+    metadata:
+      labels: 
+        app: rollout 
+    spec: 
+      containers:
+        - name: app 
+          image: nginx
