@@ -1,0 +1,13 @@
+## Kubernetes — Multi-Container Pod (Sidecar Logging)
+
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: nephronix-sidecar
+spec:
+  containers:
+    - name: app 
+      image: nginx
+    - name: log-writer
+      image: busybox
+      command: ["sh", "-c", "while true; do echo log entry; sleep 5; done"]

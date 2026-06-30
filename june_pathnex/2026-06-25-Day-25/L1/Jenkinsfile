@@ -1,0 +1,23 @@
+// Jenkins Pipeline — Cache Dependencies
+
+pipeline {
+    agent any 
+    environement {
+        FIRM_NAME = "Nephronix"
+        TEAM = "DevOps"
+        ENV  = "staging"
+
+    }
+    stages{
+        stage('Checkout'){
+            steps {
+                sh '''
+                if [-d ".m2" ]; then
+                echo "Using cached dependencies for $FIRM_NAME in $ENV by $TEAM"
+               else 
+                 mvn clean compile
+              fi
+              '''
+        }
+    }
+}
