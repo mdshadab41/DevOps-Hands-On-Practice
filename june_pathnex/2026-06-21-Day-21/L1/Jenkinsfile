@@ -1,0 +1,27 @@
+// Jenkins Pipeline — Deploy to Multiple Environments
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+    }
+    stages{
+        stage('Deploy to Dev'){
+            steps {
+                sh 'echo "Deploying $FIRM_NAME to Dev environment'
+            }
+        }
+        stage('Deploy to Staging'){
+            steps {
+                input message: "Approve Staging Deployment"
+                sh 'echo "Deploying $FIRM_NAME to Staging environement'
+            }
+        }
+    }
+    stage('Deploy to Prod'){
+        steps {
+            input message: "Approve Prod Deployment"
+            sh 'echo "Deploying $FIRM_NAME to Prod environment'
+        }
+    }
+}

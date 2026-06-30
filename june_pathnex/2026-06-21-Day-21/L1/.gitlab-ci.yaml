@@ -1,0 +1,26 @@
+stages:
+  - deploy 
+
+variables:
+  FIRM_NAME: "Nephronix"
+
+
+deploy-dev:
+  stage: deploy 
+  image: alpine:latest
+  script:
+    - echo "Deploying $FIRM_NAME to Dev environment"
+
+deploy-staging:
+  stage: deploy 
+  image: alpine:latest 
+  script:
+    - echo "Deploying $FIRM_NAME to Staging environment"
+  when: manual 
+
+deploy-prod:
+  stage: deploy 
+  image: alpine:latest 
+  script:
+    - echo "Deploying $FIRM_NAME to Prod environment"
+  when: manual

@@ -1,0 +1,15 @@
+## Ansible — Backup and Restore Files
+
+- name: Backup and Restore Files 
+  hosts: all 
+  become: true 
+
+  tasks:
+    - name: Create backup pf /etc directory 
+      command: tar -czvf /tmp/etc-backup.tar.gz /etc 
+    - name: Copy bacup to remote server
+      copy:
+        src: /tmp/etc-backup.tar.gz 
+        dest: /tmp/etc-backup.tar.gz
+    - name: Restore backup from remote server
+      command: tar -xzvf /tmp/etc-backup.tar.gz -C /
