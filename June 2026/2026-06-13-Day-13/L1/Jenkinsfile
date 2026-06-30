@@ -1,0 +1,26 @@
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+
+    }
+    matrix {
+        axes {
+            axis {
+                name 'JAVA_VERSION'
+                values '8', '11', '17'
+            }
+        }
+        stages {
+            stage('Build'){
+                steps {
+                    sh "echo Building with Java $JAVA_VERSION for $FIRM_NAME"
+                }
+            }
+            stage('Test'){
+                sh "echo Testing $FIRM_NAME on Java $JAVA_VERSION"
+            }
+        }
+    
+    }
+}
