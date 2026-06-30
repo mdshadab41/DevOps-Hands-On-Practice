@@ -1,0 +1,16 @@
+## GitLab CI — Using CI/CD Variables
+
+stages:
+  - build
+
+variables:
+  FIRM_NAME: "Nephronix"
+  API_KEY: "PLACEHOLDER_SECRET"
+
+
+build:
+  stage: build 
+  image: alpine:latest
+  script:
+    - echo "Using $API_KEY for $FIRM_NAME"
+  

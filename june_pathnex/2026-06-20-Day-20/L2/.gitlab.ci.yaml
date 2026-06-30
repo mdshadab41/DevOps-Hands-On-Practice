@@ -1,0 +1,23 @@
+# GitLab CI/CD — Secure Deployment with Secrets Management
+stages:
+  - build
+  - push
+  - deploy 
+
+build:
+  stage: build 
+  script:
+    - docker build -t nephronix-web-app .
+
+
+push:
+  stage: push 
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+    - docker push nephronix-web-app 
+
+deploy:
+  stage: deploy 
+  script:
+    - kubectl apply -f kubernetes/deployment.yaml
+    - kubectl gets pod --watch
