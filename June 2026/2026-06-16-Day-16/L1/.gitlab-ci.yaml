@@ -1,0 +1,23 @@
+
+## GitLab CI — Artifacts Promotion
+
+stages:
+  - build
+  - promote 
+
+build:
+  stage: build 
+  image: maven:3.8.1-jdk-17
+  script:
+    - mvn clean package
+  artifacts:
+    paths:
+      - target/*.jar
+    expire_in: 30 days
+
+promote:
+  stage: promote 
+  image: alpine:latest
+  script:
+    - echo "Promoting artifacts for Nephronix"
+  when: manual

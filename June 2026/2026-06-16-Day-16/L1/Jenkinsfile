@@ -1,0 +1,22 @@
+//Jenkins Pipeline — Promote Artifacts
+
+pipeline {
+    agent any 
+    environment {
+        FIRM_NAME = "Nephronix"
+    }
+
+    stages {
+        stage('Build'){
+            steps {
+                sh 'mvn clean packages'
+            }
+        }
+        stage('Promote'){
+            steps {
+                input message: "Promote artifacts to staging?"
+                sh 'echo "Promoting artifacts for $FIRM_NAME"'
+            }
+        }
+    }
+}

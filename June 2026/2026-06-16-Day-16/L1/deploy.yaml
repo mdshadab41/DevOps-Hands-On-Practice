@@ -1,0 +1,23 @@
+# Kubernetes — StatefulSet
+
+apiVersion: apps/v1 
+kind: StatefulSet
+metadata:
+  name: nephrnix-db 
+spec:
+  serviceName: "nephronix"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nephrnix-db
+  template:
+    metadata:
+      labels: 
+        app: nephronix-db
+  spec:
+    containers:
+      - name: db 
+        image: mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD 
+            value: "Nephronix123"

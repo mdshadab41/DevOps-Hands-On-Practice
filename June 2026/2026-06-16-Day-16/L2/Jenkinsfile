@@ -1,0 +1,30 @@
+ //Jenkinsfile — Deploy to Multi-Cluster Environments
+pipeline {
+    agent any 
+    stages {
+        stage('Build'){
+            steps{
+             echo 'Building Docker image...'
+            docker.build('nephronix-web-app')
+            }
+           
+        }
+        stage('Test'){
+            steps {
+                echo 'Running tests...'
+            }
+        }
+
+        stage('Deploy to Kubernetes'){
+            steps {
+                script {
+                    if (env.CLUSTER == 'us-east'){
+                        sh 'kubectl --context=us-east apply -f kubernetes/deployment.yaml'
+                    }else {
+                        sh 'kubectl --context-us-west apply -f kubernetes/deployemnt.yaml'
+                    }
+                }
+            }
+        }
+    }
+}
