@@ -1,0 +1,22 @@
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: nephronix-sidecar
+spec:
+  containers:
+    - name: main 
+      image: nginx
+      volumeMounts:
+        - name: "shared-logs"
+          mountPath: /usr/share/nginx/html
+
+    - name: sidecar 
+      image: busybox
+      command: ["sh", "-c", "echo Pathnex Sidecar > /logs/hello.txt; sleep 3600"]
+      volumeMounts:
+        - name: "shared_logs"
+          mountPath: /logs
+    
+  volumes: 
+    - name: "shared_logs"
+      emptyDir: {}

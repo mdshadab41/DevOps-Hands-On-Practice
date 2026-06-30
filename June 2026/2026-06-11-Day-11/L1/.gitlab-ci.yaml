@@ -1,0 +1,13 @@
+stages:
+  - build
+
+build:
+  stage: build 
+  image: maven:3.8.1-jdk-17
+  before_script:
+    - echo "Starting build for Nephronix"
+  script:
+    - mvn clean package
+  
+  after_script:
+    - echo "Sending notification email to team@nephronix.com"

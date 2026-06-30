@@ -1,0 +1,40 @@
+// Jenkins Pipeline — Post-Build Email Notifications
+pipeline {
+    agent any
+    environment {
+        FIRM_NAME  = 'Nephronix'
+    }
+
+    stages {
+        stage('Checkout'){
+            steps {
+                git url: 'https://github.com/Pathnex/sample-java-app.git'
+            }
+        }
+
+        stage('Build'){
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+    }
+
+    post {
+        success {
+            mail to: 'team@nephronix.com',
+                subject: "SUCCESS: Build #${env.BUILD_NUMBER}",
+
+                body: "Build completed successfully for $FIRM_NAME"
+        }
+        failure {
+            mail to: 'team@nephronix.com',
+                subject: "FAILURE: Build #${env.BUILD_NUMBER}",
+                body: "Build failed for $FIRM_NAME"
+        }
+        //Task — Add always block
+        always {
+            echo "Pipeline finished for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+        }
+    }
+
+}
