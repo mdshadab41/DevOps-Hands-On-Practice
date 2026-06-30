@@ -1,0 +1,2 @@
+docker logs nephronix-nginx
+docker inspect nephronix-nginx

@@ -1,0 +1,22 @@
+# Kubernetes — Network Policies for Security
+apiVersion: networing.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nephronix-web-app
+spec:
+  podSelector:
+    matchLabels:
+      app: nephronix-web-app 
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+       - podSelector:
+           matchLabels:
+             app: nephronix-api 
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+                app: nephronix-database
